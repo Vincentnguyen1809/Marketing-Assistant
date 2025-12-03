@@ -5,11 +5,16 @@ import { Services } from './components/Services';
 import { Evidence } from './components/Evidence';
 import { Assistant } from './components/Assistant';
 import { Contact } from './components/Contact';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { TermsOfService } from './components/TermsOfService';
 import { Section } from './types';
 import { Menu, X, Shield } from 'lucide-react';
 
+type View = 'home' | 'privacy' | 'terms';
+
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<Section>(Section.HERO);
+  const [currentView, setCurrentView] = useState<View>('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,12 +27,17 @@ const App: React.FC = () => {
   }, []);
 
   const scrollToSection = (section: Section) => {
+    setCurrentView('home'); // Ensure we are on home view
     setActiveSection(section);
     setIsMobileMenuOpen(false);
-    const element = document.getElementById(section);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    
+    // Slight delay to allow view render if switching from legal pages
+    setTimeout(() => {
+      const element = document.getElementById(section);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   const navLinks = [
@@ -39,6 +49,16 @@ const App: React.FC = () => {
     { id: Section.CONTACT, label: 'Contact' },
   ];
 
+  // Render specific view based on state
+  if (currentView === 'privacy') {
+    return <PrivacyPolicy onBack={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'terms') {
+    return <TermsOfService onBack={() => setCurrentView('home')} />;
+  }
+
+  // Default Home View
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
       {/* Navigation */}
@@ -123,8 +143,8 @@ const App: React.FC = () => {
           </div>
           <p className="text-sm">© 2024. Specialized Digital Marketing for Life Insurance.</p>
           <div className="flex gap-6 text-sm font-medium">
-            <a href="#" className="hover:text-amber-500 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-amber-500 transition-colors">Terms of Service</a>
+            <button onClick={() => setCurrentView('privacy')} className="hover:text-amber-500 transition-colors">Privacy Policy</button>
+            <button onClick={() => setCurrentView('terms')} className="hover:text-amber-500 transition-colors">Terms of Service</button>
           </div>
         </div>
       </footer>
