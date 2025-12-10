@@ -1,14 +1,13 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { BarChart3, TrendingUp, Activity, Quote, MapPin, Star, Globe, Facebook } from 'lucide-react';
-import { useConfig } from '../context/ConfigContext';
+import { useConfig } from '../context/ConfigContext.js';
 
-export const Evidence: React.FC = () => {
+export const Evidence = () => {
   const { config } = useConfig();
   const { metrics, chartData, liveCampaigns, testimonials, theme } = config;
   
   const [isVisible, setIsVisible] = useState(false);
-  const chartRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef(null);
   
   const maxRevenue = Math.max(...chartData.map(d => d.revenue));
   const maxYearIndex = chartData.length - 1;
@@ -46,7 +45,7 @@ export const Evidence: React.FC = () => {
     return `M ${points.join(' L ')}`;
   };
 
-  const getPointCoordinates = (index: number) => {
+  const getPointCoordinates = (index) => {
     const width = 1000;
     const height = 400;
     const padding = 20;

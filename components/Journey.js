@@ -1,13 +1,12 @@
-
 import React from 'react';
 import { TrendingUp, AlertTriangle, CheckCircle2, Award, Flag } from 'lucide-react';
-import { useConfig } from '../context/ConfigContext';
+import { useConfig } from '../context/ConfigContext.js';
 
-export const Journey: React.FC = () => {
+export const Journey = () => {
   const { config } = useConfig();
   const { milestones, theme } = config;
 
-  const getIcon = (type: string) => {
+  const getIcon = (type) => {
     switch (type) {
       case 'start': return <Flag className="w-6 h-6 text-blue-500" />;
       case 'fail': return <AlertTriangle className="w-6 h-6 text-red-500" />;
@@ -17,7 +16,7 @@ export const Journey: React.FC = () => {
     }
   };
 
-  const getPlaceholderImage = (index: number) => {
+  const getPlaceholderImage = (index) => {
     const images = [
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop", 
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",

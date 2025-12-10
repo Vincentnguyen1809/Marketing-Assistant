@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, ArrowRight, CheckCircle, X, Loader2 } from 'lucide-react';
-import { useConfig } from '../context/ConfigContext';
+import { useConfig } from '../context/ConfigContext.js';
 
-export const Contact: React.FC = () => {
+export const Contact = () => {
   const { config } = useConfig();
   const { companyInfo, theme } = config;
 
@@ -17,7 +16,7 @@ export const Contact: React.FC = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) return;
 

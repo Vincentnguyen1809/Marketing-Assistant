@@ -1,14 +1,9 @@
-
 import React from 'react';
 import { ArrowRight, ChevronDown, Play, Shield } from 'lucide-react';
-import { Section } from '../types';
-import { useConfig } from '../context/ConfigContext';
+import { Section } from '../types.js';
+import { useConfig } from '../context/ConfigContext.js';
 
-interface HeroProps {
-  scrollToSection: (section: Section) => void;
-}
-
-export const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
+export const Hero = ({ scrollToSection }) => {
   const { config } = useConfig();
   const { hero, productExpertise, theme } = config;
 

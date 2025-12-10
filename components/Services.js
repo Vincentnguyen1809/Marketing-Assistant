@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Target, ShieldCheck, Zap, Check, Play } from 'lucide-react';
-import { useConfig } from '../context/ConfigContext';
+import { useConfig } from '../context/ConfigContext.js';
 
-const getIcon = (name: string, color: string) => {
+const getIcon = (name, color) => {
   const style = { color: color };
   switch (name) {
     case 'Target': return <Target className="w-10 h-10" style={style} />;
@@ -13,7 +12,7 @@ const getIcon = (name: string, color: string) => {
   }
 };
 
-export const Services: React.FC = () => {
+export const Services = () => {
   const { config } = useConfig();
   const { services, productExpertise, videoPortfolio, theme } = config;
 

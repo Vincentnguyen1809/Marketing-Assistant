@@ -1,26 +1,23 @@
-
 import React, { useState, useEffect } from 'react';
-import { ConfigProvider, useConfig } from './context/ConfigContext';
-import { Hero } from './components/Hero';
-import { Journey } from './components/Journey';
-import { Services } from './components/Services';
-import { Evidence } from './components/Evidence';
-import { Assistant } from './components/Assistant';
-import { Contact } from './components/Contact';
-import { PrivacyPolicy } from './components/PrivacyPolicy';
-import { TermsOfService } from './components/TermsOfService';
-import { AdminLogin } from './components/Admin/AdminLogin';
-import { AdminDashboard } from './components/Admin/AdminDashboard';
-import { Section } from './types';
+import { ConfigProvider, useConfig } from './context/ConfigContext.js';
+import { Hero } from './components/Hero.js';
+import { Journey } from './components/Journey.js';
+import { Services } from './components/Services.js';
+import { Evidence } from './components/Evidence.js';
+import { Assistant } from './components/Assistant.js';
+import { Contact } from './components/Contact.js';
+import { PrivacyPolicy } from './components/PrivacyPolicy.js';
+import { TermsOfService } from './components/TermsOfService.js';
+import { AdminLogin } from './components/Admin/AdminLogin.js';
+import { AdminDashboard } from './components/Admin/AdminDashboard.js';
+import { Section } from './types.js';
 import { Menu, X, Shield } from 'lucide-react';
 
-type View = 'home' | 'privacy' | 'terms';
-
 // The Main Portfolio App Content
-const PortfolioContent: React.FC = () => {
+const PortfolioContent = () => {
   const { config } = useConfig();
-  const [activeSection, setActiveSection] = useState<Section>(Section.HERO);
-  const [currentView, setCurrentView] = useState<View>('home');
+  const [activeSection, setActiveSection] = useState(Section.HERO);
+  const [currentView, setCurrentView] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -32,7 +29,7 @@ const PortfolioContent: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (section: Section) => {
+  const scrollToSection = (section) => {
     setCurrentView('home');
     setActiveSection(section);
     setIsMobileMenuOpen(false);
@@ -136,7 +133,7 @@ const PortfolioContent: React.FC = () => {
 };
 
 // Application Shell handles Routing
-const AppShell: React.FC = () => {
+const AppShell = () => {
   const { currentUser } = useConfig();
   const [isAdminRoute, setIsAdminRoute] = useState(false);
 
@@ -157,7 +154,7 @@ const AppShell: React.FC = () => {
   return <PortfolioContent />;
 };
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <ConfigProvider>
       <AppShell />
