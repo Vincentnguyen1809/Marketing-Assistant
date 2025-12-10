@@ -1,25 +1,25 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft, Shield } from 'lucide-react';
+import { html } from '../utils/html.js';
 
 export const PrivacyPolicy = ({ onBack }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  return (
+  return html`
     <div className="min-h-screen bg-white text-slate-800 font-sans">
-      {/* Header */}
       <div className="bg-slate-950 py-6 border-b border-slate-900 sticky top-0 z-50">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-2 text-white font-bold text-xl">
-            <Shield className="w-8 h-8 text-amber-500" />
+            <${Shield} className="w-8 h-8 text-amber-500" />
             <span>Marketing<span className="text-amber-500">Master</span></span>
           </div>
           <button 
-            onClick={onBack}
+            onClick=${onBack}
             className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-sm font-medium"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Home
+            <${ArrowLeft} className="w-4 h-4" /> Back to Home
           </button>
         </div>
       </div>
@@ -98,5 +98,5 @@ export const PrivacyPolicy = ({ onBack }) => {
         </div>
       </div>
     </div>
-  );
+  `;
 };

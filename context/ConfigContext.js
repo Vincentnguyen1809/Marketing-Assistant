@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { html } from '../utils/html.js';
 import { 
   METRICS, 
   MILESTONES, 
@@ -10,7 +11,6 @@ import {
   VIDEO_PORTFOLIO 
 } from '../constants.js';
 
-// Default Config based on constants.js
 const DEFAULT_CONFIG = {
   companyInfo: {
     name: "LifeInsure Marketing Master",
@@ -39,7 +39,6 @@ const DEFAULT_CONFIG = {
   videoPortfolio: VIDEO_PORTFOLIO
 };
 
-// Default Users
 const DEFAULT_USERS = [
   { username: 'admin', role: 'super_admin' }
 ];
@@ -51,7 +50,6 @@ export const ConfigProvider = ({ children }) => {
   const [users, setUsers] = useState(DEFAULT_USERS);
   const [currentUser, setCurrentUser] = useState(null);
 
-  // Load from LocalStorage on mount
   useEffect(() => {
     const savedConfig = localStorage.getItem('site_config');
     if (savedConfig) {
@@ -103,8 +101,8 @@ export const ConfigProvider = ({ children }) => {
     setCurrentUser(null);
   };
 
-  return (
-    <ConfigContext.Provider value={{ 
+  return html`
+    <${ConfigContext.Provider} value=${{ 
       config, 
       updateConfig, 
       resetConfig, 
@@ -115,9 +113,9 @@ export const ConfigProvider = ({ children }) => {
       login,
       logout
     }}>
-      {children}
-    </ConfigContext.Provider>
-  );
+      ${children}
+    </${ConfigContext.Provider}>
+  `;
 };
 
 export const useConfig = () => {
